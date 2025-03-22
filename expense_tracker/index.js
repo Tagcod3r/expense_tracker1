@@ -30,12 +30,6 @@ app.use(session({
 app.use(flash());
 app.use(cookieParser());
 
-// ... rest of your routes and middleware ...
-
-app.listen(port, '0.0.0.0', () => {
-  console.log("Server running on port " + port);
-});
-
 // Middleware to pass flash messages to views
 app.use((req, res, next) => {
   res.locals.loginError = req.flash("loginError")[0] || null;
