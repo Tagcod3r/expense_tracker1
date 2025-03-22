@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import { dirname } from 'path';
 import path from 'path';
@@ -6,14 +5,13 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-// Instead of importing { db, connectDB } from './config/db.js'
 import { supabase } from './config/db.js';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcrypt';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;  // Use dynamic port
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -22,20 +20,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Setup Redis client and store (if needed)
-// const RedisStore = ConnectRedis(session);
-// const redisClient = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
-
 app.use(session({
-  // store: new RedisStore({ client: redisClient }),
-  secret: 'Guessyouwillneverknow',
+  secret: process.env.SESSION_SECRET || 'Guessyouwillneverknow',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, sameSite: 'lax' }
+  cookie: { secure: process.env.NODE_ENV === 'production', sameSite: 'lax' }
 }));
 
 app.use(flash());
 app.use(cookieParser());
+
+// ... rest of your routes and middleware ...
+
+app.listen(port, '0.0.0.0', () => {
+  console.log("Server running on port " + port);
+});
 
 // Middleware to pass flash messages to views
 app.use((req, res, next) => {
