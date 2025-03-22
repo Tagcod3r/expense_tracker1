@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Dashboard</title>
+  <link rel="icon" href="/logo.webp" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Include dashboard.css and addexpenseModel.css if needed -->
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/addexpenseModel.css">
+  <link rel="stylesheet" href="/css/accountform.css">
+  <link rel="stylesheet" href="/css/view-all.css">
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/addExpenseModel.js" defer></script>
+  <script src="/js/view-all.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <%- include("partials/dashboardSidebar") %>
+  <!-- Main Dashboard Content -->
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <h1>Welcome, <%= username %></h1>
+      <!-- Hamburger menu visible on mobile -->
+      <button id="menu-toggle" class="menu-toggle">☰</button>
+    </header>
+  
+    <!-- Add Account Button (placed above account selection dropdown) -->
+  <button id="addAccountBtn" class="add-account-btn">+ Add New Account</button>
+
+  
+   <!-- Account Selection Section with Sample Accounts -->
+   <div class="account-selection">
+    <label for="accountDropdown">Select an Account:</label>
+    <select id="accountDropdown" class="form-select">
+      <option value="" disabled selected>Select an account</option>
+      <% accounts.forEach(function(account) { %>
+        <option value="<%= account.account_id %>" data-balance="<%= account.initial_bal %>">
+          <%= account.account_name %>
+        </option>
+      <% }); %>
+    </select>
+  </div>
+  
+  <% if (accountMessage) { %>
+    <div class="flash-message" style="display: none;"><%= accountMessage %></div>
+  <% } else { %>
+    <div class="flash-message" style="display: none;"></div> <!-- Empty flash message container -->
+  <% } %>
+  
+  <% if (expenseMessage) { %>
+    <div class="flash-message "><%= expenseMessage %></div>
+  <% } %>
+  
+   <!-- Add Expense Button (Initially Hidden) -->
+   <button id="addExpenseBtn" class="add-expense-btn" style="display: none;">+ Add New Expense</button>
+  <input type="hidden" id="selectedAccount" name="selectedAccount" value="3" />
+
+<div id="note-message" role="alert" aria-live="polite">
+    <p>Note: Previously loaded data might still be visible. Please select your account to refresh and display the current information.</p>
+    <button class="close-btn" aria-label="Close notification">&times;</button>
+</div>
+   
+    <section class="stats">
+      <div class="card">
+        <h2>Balance Remaining</h2>
+        <p id="balanceAmount"><%= balanceRemaining || "0.00"%></p>
+      </div>
+      <div class="card">
+        <h2>Expenses</h2>
+        <p id="totalExpensesDisplay"><%= totalExpenses || "0.00"%></p>
+      </div>
+      <div class="card">
+        <h2>Initial Balance</h2>
+        <p id="initialBalanceDisplay"><%= initialBalance || "0.00"%></p>
+      </div>
+    </section>
+    
+    <section class="content">
+      <h2>Recent Activity</h2>
+      <% if (recentExpenses && recentExpenses.length > 0) { %>
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date & Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% recentExpenses.forEach(function(expense) { %>
+              <tr>
+                <td><%= expense.expense_title %></td>
+                <td>
+                  <%= new Date(expense.expense_date).toLocaleDateString('en-GB', { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                  }).replace(/,/g, '') %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <div class="view-all">
+          <a href="#" id="viewAllLink">View All →</a>
+        </div>
+      <% } else { %>
+        <div class="no-expenses">
+          <p>No recent expenses found.</p>
+        </div>
+      <% } %>
+    </section>
+    
+    
+    <!-- Other partials -->
+    <%- include("partials/expenseform") %>  
+    <%- include("partials/accountform") %>
+    <!-- Wrap the view-all partial in a modal container -->
+    <div id="viewAllModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <%- include("partials/view-all") %>
+      </div>
+    </div>
+    
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Optional: Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const accountDropdown = document.getElementById("accountDropdown");
+      const addExpenseBtn = document.getElementById("addExpenseBtn");
+      const balanceAmount = document.getElementById("balanceAmount");
+
+      accountDropdown.addEventListener("change", function() {
+        if (this.value) {
+          // Show the add expense button when an account is selected
+          addExpenseBtn.style.display = "block";
+          // Update balance display using the selected account's sample balance\n          balanceAmount.textContent = \"$\" + this.selectedOptions[0].dataset.balance;
+        } else {
+          addExpenseBtn.style.display = "none";
+          balanceAmount.textContent = "0";
+        }
+      });
+    });
+  </script>
+    <%- include("partials/loading") %>
+</body>
+</html>

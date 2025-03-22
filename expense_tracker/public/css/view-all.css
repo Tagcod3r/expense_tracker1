@@ -1,0 +1,238 @@
+/* =========================
+   view-all.css Styles (Mobile-First)
+========================= */
+:root {
+  --surface-1: #ffffff;
+  --surface-2: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4d4d4d;
+  --accent-primary: #4361ee;
+  --danger: #ff4757;
+  --transition-speed: 0.3s;
+  --radius-base: 0.5rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+  --border-accent: #ff4757;
+}
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------------------
+   Mobile-First Base Styles
+------------------------- */
+
+/* Modal System */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+  overflow-y: auto;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.modal-content {
+  background: var(--surface-1);
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border-radius: var(--radius-base);
+  width: calc(100% - 2rem);
+  position: relative;
+  animation: modalEntrance 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Modal Close Button */
+.modal .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.modal .close:hover {
+  background: var(--accent-primary);
+  color: var(--surface-1);
+  transform: scale(1.1);
+}
+
+/* Expenses Layout */
+.expenses-list {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.expense-card {
+  background: var(--surface-1);
+  padding: 1rem;
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.expense-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Paid Badge */
+.status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* Paid Badge - Updated Style */
+.status-badge.paid {
+  background: rgba(40, 167, 69, 0.12);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  border-radius: 4px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Card Elements */
+/* Add right padding to ensure text doesn’t run under the badge */
+.expense-card h3,
+.expense-card p,
+.expense-amount {
+  padding-right: 4rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.expense-card h3 {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.expense-card p {
+  color: var(--text-secondary);
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  line-height: 1.5;
+}
+
+.expense-amount {
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin: 1rem 0;
+}
+
+/* Delete Button */
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 71, 87, 0.08);
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+/* Remove Default Shadows and Add Borders */
+.expense-card,
+.modal-content {
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Animations */
+@keyframes modalEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   Desktop & Larger Devices
+========================= */
+@media (min-width: 641px) {
+  .modal {
+    padding: 1.5rem;
+  }
+  
+  .modal-content {
+    width: min(90%, 600px);
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+  
+  .expenses-list {
+    width: min(100%, 800px);
+    margin: 1.5rem auto;
+  }
+  
+  .expense-card {
+    padding: 1.5rem;
+  }
+  
+  .delete-btn {
+    width: auto;
+  }
+  
+  /* Restore original typography sizes on larger screens */
+  .expense-card h3 {
+    font-size: 1.25rem;
+    padding-right: 4rem;
+  }
+  
+  .expense-card p {
+    font-size: 0.9rem;
+    padding-right: 4rem;
+  }
+  
+  .expense-amount {
+    font-size: 1.25rem;
+    padding-right: 4rem;
+  }
+}

@@ -1,0 +1,17 @@
+<!-- Account Modal -->
+<div id="accountModal" class="account-modal hidden" role="dialog" aria-labelledby="accountModalTitle">
+  <div class="modal-content">
+    <button class="close-btn" id="closeAccountModal" aria-label="Close">&times;</button>
+    <h2 id="accountModalTitle">Create New Account</h2>
+    <form id="accountForm" action="/add-account" method="POST" aria-disabled="true">
+      <label for="account_name">Account Name</label>
+      <input type="text" id="account_name" name="account_name" placeholder="e.g., Cash Wallet" required>
+      <label for="initial_balance">Initial Balance</label>
+      <input type="number" step="0.01" id="initial_balance" name="initial_balance" placeholder="e.g., 5000" required>
+      <div class="modal-footer">
+        <button type="submit" class="submit-btn">Create Account</button>
+        <button type="button" class="cancel-btn" id="cancelAccountModal">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

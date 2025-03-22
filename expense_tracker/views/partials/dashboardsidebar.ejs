@@ -1,0 +1,25 @@
+<!-- views/partials/dashboardSidebar.ejs -->
+<nav class="sidebar">
+    <div class="logo">
+      <img src="/logo.webp" alt="Logo" />
+      <span>Expense Tracker</span>
+    </div>
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a class="nav-link <%= activePage === 'home' ? 'active' : '' %>" href="/home">Home</a>
+          </li>
+      <li class="nav-item <%= activePage === 'dashboard' ? 'active' : '' %>">
+        <a href="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item <%= activePage === 'expense' ? 'active' : '' %>">
+        <a href="/expense">Expenses</a>
+      </li>
+      <li class="nav-item <%= activePage === 'reports' ? 'active' : '' %>">
+        <a href="/generate-report">Reports</a>
+      </li>
+      <li class="nav-item <%= activePage === 'settings' ? 'active' : '' %>">
+        <a href="/settings">Settings</a>
+      </li>
+    </ul>
+  </nav>
+  

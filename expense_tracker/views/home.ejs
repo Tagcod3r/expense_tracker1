@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="icon" href="/logo.webp" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/confirmation.css" />
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/login-register.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  </head>
+  
+<body>
+  <header>
+    <%- include("partials/navbar") %>
+    <%- include("partials/confirmation") %>
+    <script src="/js/confirmation.js"></script>
+  </header>
+  
+  <main>
+    <section class="intro">
+      <h1>Expense Tracker</h1>
+      <p>Spend Smart, Save Better.</p>
+    </section>
+  </main>
+
+  <div class="main-container" style="margin-top: 0; margin-left: 0;">
+    <!-- Left Content Section -->
+    <div class="content-section">
+      <p>Dashboard Guidelines</p>
+      <ul>
+        <li><span class="checkmark"></span>Click the Dashboard hyperlink to access your main control panel.</li>
+        <li><span class="checkmark"></span>Use the "Add Account" button at the top to open the form for creating a new account.</li>
+        <li><span class="checkmark"></span>Enter expense details and watch your account balance update dynamically.</li>
+      </ul>
+    </div>
+    
+    <!-- Image-Video Section with Lottie Animations -->
+    <div id="lottie-container" class="image-video-section">
+      <dotlottie-player
+        id="lottie1"
+        src="https://lottie.host/6636fbf3-dcf1-4958-9653-0d8a250ddd92/Rvrqhf1lZt.lottie"
+        background="transparent" 
+        speed="1" 
+        style="width: 300px; height: 300px;" 
+        loop autoplay>
+      </dotlottie-player>
+    </div>    
+  </div>
+  <!-- Flash Message -->
+  <% if (loginError) { %>
+    <div class="flash-message success"><%= loginError %></div>
+  <% } %>
+  <% if (message) { %>
+    <div class="flash-message success"><%= message %></div>
+  <% } %>
+
+    <%- include("partials/guidelines") %>
+  <div class="short-message" style="margin-bottom: 10vh;margin-top: 10vh;">
+    <div></div>
+    <p>Track <span1>expenses</span1>,<br>Monitor your <span1>spending</span1>, <br>set <span1>budgets</span1>,<br>achieve your <span1>financial goals</span1>.</p>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select the paragraph inside .short-message
+      const shortMessage = document.querySelector(".short-message p");
+      if (!shortMessage) return;
+      
+      // If not already wrapped in spans, split and wrap each line.
+      let lines = shortMessage.querySelectorAll(".line");
+      if (lines.length === 0) {
+        const parts = shortMessage.innerHTML.split(/<br\s*\/?>/gi);
+        shortMessage.innerHTML = parts.map(part => `<span class="line">${part.trim()}</span>`).join("<br>");
+        lines = shortMessage.querySelectorAll(".line");
+      }
+      
+      // Set initial styles via inline style if needed; here we only set opacity and transform,
+      // leaving all spacing/layout to your CSS.
+      lines.forEach(line => {
+        line.style.opacity = 0;
+        line.style.transform = "translateY(20px)";
+      });
+      
+      // Create an IntersectionObserver for the .short-message paragraph
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Animate each line with a stagger, without altering spacing
+            anime({
+              targets: lines,
+              opacity: [0, 1],
+              translateY: [20, 0],
+              easing: 'easeOutExpo',
+              duration: 5000,
+              delay: anime.stagger(200)
+            });
+            observer.unobserve(shortMessage);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(shortMessage);
+    });
+    </script>
+   
+    <div class="main-container">
+          <!-- Image-Video Section with Lottie Animations -->
+          <div id="lottie-container" class="image-video-section">
+            <dotlottie-player 
+              src="https://lottie.host/1e678bd1-5693-4fa8-9959-e0849b4b6f9e/98c5rGFuXn.lottie" 
+              id="lottie4"
+              background="transparent" 
+              speed="0.75" 
+              style="width: 40px; height: 400px" 
+              loop autoplay>
+            </dotlottie-player>
+          
+            <dotlottie-player 
+              src="https://lottie.host/bf63d714-f53c-47c7-b817-1b71c534304c/1W2Bp8JhIB.lottie" 
+              id="lottie5" 
+              background="transparent" 
+              speed="0.75" 
+              style="width: 400px; height: 400px" 
+              loop autoplay>
+            </dotlottie-player>
+          
+            <dotlottie-player 
+              src="https://lottie.host/9d7038cb-0b22-48b1-98dc-3cacebccdc84/xvMdYizHNQ.lottie" 
+              id="lottie6" 
+              background="transparent" 
+              speed="0.6" 
+              style="width: 300px; height: 300px" 
+              loop autoplay>
+            </dotlottie-player>
+          
+            <dotlottie-player 
+              src="https://lottie.host/9d1a826c-8ca5-4e1b-b3fb-2246d35d5698/kOG3Q9TWFV.lottie" 
+              id="lottie7" 
+              background="transparent" 
+              speed="0.3" 
+              style="width: 300px; height: 300px" 
+              loop autoplay>
+            </dotlottie-player>
+          </div>          
+            <!-- Left Content Section -->
+            <div class="content-section">
+              <p>Take Control of Your Finances</p>
+              <ul>
+                <li><span class="checkmark"></span>Easily log your daily expenses with just a few clicks.</li>
+                <li><span class="checkmark"></span>Organize your spending into categories for better tracking.</li>
+                <li><span class="checkmark"></span>Review the recent activities table displaying your latest three expense entries.</li>
+                <li><span class="checkmark"></span>Click "View All" to see the full history of your expenses and manage deletions.</li>
+              </ul>
+              <a href="/dashboard">
+                <button class="get-started" style="margin-top: 20px;" >Start Tracking</button>
+              </a>  
+        </div>
+      </div>
+      <div class="main-container">
+        <div id="lottie-container" class="image-video-section">
+          <!-- Single Lottie Animation -->
+          <dotlottie-player 
+          src="https://lottie.host/41b593d6-6264-477b-882a-0a939fc07ea6/e3H7fyL4t8.lottie"
+          id="standalone" 
+          background="transparent" 
+          speed="1" 
+          style="width: 300px; height: 300px;" 
+          loop 
+          autoplay>
+        </dotlottie-player>
+        </div>
+      
+        <!-- Left Content Section -->
+        <div class="content-section" id="expense">
+          <p>Expense Table</p>
+          <ul>
+            <li><span class="checkmark"></span>View all your expenses in a detailed table format.</li>
+            <li><span class="checkmark"></span>Easily check timestamps and categories for every expense.</li>
+            <li><span class="checkmark"></span>Quickly locate expenses using the search bar.</li>
+            <li><span class="checkmark"></span>Analyze your monthly expense summary for better insights.</li>
+            <li><span class="checkmark"></span>The table is accessible after selecting <span style="text-decoration: underline !important;">an account at least once.</span></span></li>
+          </ul>
+          <a href="/expense">
+            <button class="get-started" style="margin-top: 20px;">Review</button>
+          </a>  
+        </div>
+      </div>
+      
+      
+      <div class="main-container" style="margin-top: 40px; border-bottom: none;">
+        <div id="lottie-container" class="image-video-section">
+          <dotlottie-player src="https://lottie.host/bf55e799-0026-4916-9858-2c16f4fbf713/ROtVEdSfyQ.lottie" id="lottie8"background="transparent" speed="0.8" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+          <dotlottie-player src="https://lottie.host/f31e9be3-33c5-4584-9744-02c208e4fbe2/YaC5MUzmJY.lottie" id="lottie9"background="transparent" speed="0.2" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+          <dotlottie-player src="https://lottie.host/cf540ba9-808b-402f-b792-010530a446b9/Jgxw6STqwo.lottie" id="lottie10"background="transparent" speed="0.8" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+          </div>
+          <div class="content-section"  id="report" >
+            <p>Real-Time Insights</p>
+            <ul>
+              <li><span class="checkmark"></span>Select a report type (bar, pie, or line) to generate a report.</li>
+              <li><span class="checkmark"></span>Review the generated report on the screen.</li>
+              <li><span class="checkmark"></span>Download your report as a PDF or image after adding a description.</li>
+            </ul>
+            <a href="/generate-report">
+              <button class="get-started" style="margin-top: 20px;" >Analyze Report</button>
+            </a>  
+      </div>
+    </div>
+     
+    <section class="queries-section" style="margin-top: -40px; border-top:0.1px solid #e0e0df;">
+      <h2>Have any queries?</h2>
+      <p>Send us a message, and we'll get back to you soon!</p>
+    
+      <form class="queries-form" action="https://formspree.io/f/xzzednaq" method="post">
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+        />
+        <textarea 
+          name="message"
+          placeholder="Write your query here..."
+          required
+        ></textarea>
+        <button type="submit">Send Inquiry</button>
+      </form>
+    </section>
+    <script>
+      document.querySelector(".queries-form").addEventListener("submit", (e) => {
+        const form = e.target;
+        setTimeout(() => {
+          form.reset(); // Clear the form fields after submission
+        }, 0); // Delay the reset slightly to ensure the form is submitted
+      });
+    </script>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <h3>Meet the Contributors</h3>
+          <div class="contributors">
+            <div class="contributor">
+              <img src="/photo.jpeg" alt="Akshith V">
+              <span>Akshith V</span>
+            </div>
+            <div class="contributor">
+              <img src="/photo2.jpeg" alt="Jacob">
+              <span>Jacob Lazar</span>
+            </div> 
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <a href="#top" class="back-to-top" aria-label="Back to top"></a>
+    <script> 
+      let lastScroll = 0;
+const backToTop = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  // Show when scrolling down
+  if (currentScroll > lastScroll) {
+    backToTop.classList.add('visible');
+  }else if(currentScroll < lastScroll){
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+  
+  // Always hide at top
+  if (currentScroll === 0) {
+    backToTop.classList.remove('visible');
+  }
+  
+  lastScroll = currentScroll;
+});
+
+// Smooth scroll to top
+backToTop.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+    </script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/login-register.js"></script>
+  <script src="/js/lottie.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdowns = document.querySelectorAll(".dropdown"); // Select all dropdowns
+    
+        // Show the dropdown when hovered
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener("click", function () {
+                this.classList.add("active");
+            });
+        });
+    
+        // Hide the dropdown when clicked outside
+        document.addEventListener("click", function (event) {
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove("active"); // Close dropdown
+                }
+            });
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  const currentPath = window.location.pathname;
+  
+  navLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPath || currentPath.startsWith(link.getAttribute("href"))) {
+      link.classList.add("active");
+    }
+  });
+});
+
+    </script>
+    <script>
+      // Toggle the mobile navbar with smooth slide-down animation
+      const hamburger = document.getElementById('hamburger');
+      const navbarLinks = document.getElementById('navbar-links');
+      
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navbarLinks.classList.toggle('active');
+      });
+    </script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <%- include("partials/loading") %>
+      
+</body>
+</html>

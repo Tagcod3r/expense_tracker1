@@ -1,0 +1,105 @@
+<!-- Expense Form Page -->
+<!-- Other parts of your view–all page here... -->
+
+<!-- Wrap the Add Expense Modal and Expense Details Modal inside the container -->
+<div id="addExpenseModalContainer">
+  <!-- Expense Modal -->
+  <div class="expense-modal hidden" id="expenseModal">
+      <div class="modal-content">
+        <!-- For desktop close -->
+        <button class="close-btn" id="closeModal">&times;</button>
+        <h2>Add New Expense</h2>
+
+        <form id="expenseForm" action="/add-expense" method="POST" aria-disabled="true">
+          <!-- Amount -->
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" name="amount" placeholder="Required" required />
+
+          <!-- Category Pills -->
+          <label>Category <span style="color: #f563a5">*</span></label>
+          <input type="text" id="category" name="category" placeholder="Required" required />
+          <div class="category-pills" id="categoryPills" name="category">
+            <!-- Personal Finance -->
+            <div class="category-group">
+              <h4 class="group-label">Personal</h4>
+              <button type="button" class="pill">Food/Groceries</button>
+              <button type="button" class="pill">Utilities/Bills</button>
+              <button type="button" class="pill">Rent/Mortgage</button>
+              <button type="button" class="pill">Healthcare/Medical</button>
+              <button type="button" class="pill">Education/Tuition</button>
+              <button type="button" class="pill">Personal Care</button>
+            </div>
+
+            <!-- Financial Accounts -->
+            <div class="category-group">
+              <h4 class="group-label">Financial Accounts</h4>
+              <button type="button" class="pill">Credit Card Payments</button>
+              <button type="button" class="pill">Loan Payments</button>
+              <button type="button" class="pill">Investment Contributions</button>
+              <button type="button" class="pill">Retirement Accounts</button>
+              <button type="button" class="pill">Savings Deposits</button>
+              <button type="button" class="pill">Tax Payments</button>
+            </div>
+
+            <!-- Business & Work -->
+            <div class="category-group">
+              <h4 class="group-label">Business</h4>
+              <button type="button" class="pill">Office Expenses</button>
+              <button type="button" class="pill">Business Travel</button>
+              <button type="button" class="pill">Client Entertainment</button>
+              <button type="button" class="pill">Professional Fees</button>
+              <button type="button" class="pill">Software/Subscriptions</button>
+              <button type="button" class="pill">Equipment Purchase</button>
+            </div>
+
+            <!-- Lifestyle -->
+            <div class="category-group">
+              <h4 class="group-label">Lifestyle</h4>
+              <button type="button" class="pill">Entertainment</button>
+              <button type="button" class="pill">Travel/Vacation</button>
+              <button type="button" class="pill">Hobbies</button>
+              <button type="button" class="pill">Gifts/Donations</button>
+              <button type="button" class="pill">Fitness/Sports</button>
+              <button type="button" class="pill">Pets</button>
+            </div>
+
+            <!-- Special Categories -->
+            <div class="category-group">
+              <h4 class="group-label">Special</h4>
+              <button type="button" class="pill">Insurance Premiums</button>
+              <button type="button" class="pill">Childcare/Education</button>
+              <button type="button" class="pill">Alimony/Support</button>
+              <button type="button" class="pill">Legal Fees</button>
+              <button type="button" class="pill">Emergency Fund</button>
+              <button type="button" class="pill">Cash Withdrawals</button>
+            </div>
+          </div>
+
+          <!-- Hidden input to store the selected account -->
+          <input type="hidden" id="selectedAccount" name="selectedAccount" value="<%= selectedAccount %>">
+          <!-- Instead of final submit, intercept to show additional modal -->
+          <button type="button" id="proceedExpense" class="submit-btn">Next</button>
+        </form>
+      </div>
+  </div>
+
+  <!-- Expense Details Modal -->
+  <div class="expense-details-modal hidden" id="expenseDetailsModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeDetailsModal">&times;</button>
+      <h2>Expense Details</h2>
+      <form id="expenseDetailsForm" class="expense-details-form">
+        <label for="expenseTitle">Expense Title</label>
+        <input type="text" id="expenseTitle" name="expense_title" placeholder="e.g., Dinner at Joe's" required />
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="3" placeholder="Additional details..." required></textarea>
+
+        <div class="modal-footer">
+          <button type="submit" class="submit-btn">Submit Expense</button>
+          <button type="button" class="cancel-btn" id="cancelDetailsModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

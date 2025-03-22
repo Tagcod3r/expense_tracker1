@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker - Reports</title>
+    <link rel="icon" href="/logo.webp" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Include your existing dashboard CSS -->
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <!-- Include reports.css for report-specific styles (including modal styling) -->
+    <link rel="stylesheet" href="/css/reports.css" />
+    <!-- Chart.js and jsPDF libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <%- include("partials/dashboardSidebar") %>
+    <!-- Main Reports Content -->
+    <main class="dashboard">
+      <header class="dashboard-header">
+        <h1>Reports</h1>
+        <!-- Mobile menu toggle -->
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+      </header>
+
+      <!-- Report Options Section -->
+      <div class="report-options">
+        <label>
+          <input type="radio" name="reportType" value="pie" checked />
+          Pie Chart
+        </label>
+        <label>
+          <input type="radio" name="reportType" value="bar" />
+          Bar Chart
+        </label>
+        <label>
+          <input type="radio" name="reportType" value="line" />
+          Line Chart
+        </label>
+        <button id="generateReport">Generate Report</button>
+      </div>
+
+      <!-- Chart Container -->
+      <div class="chart-container">
+        <canvas id="chartCanvas"></canvas>
+      </div>
+
+      <!-- Download Options: Initially hidden -->
+      <div id="downloadOptions" class="download-options" style="display: none;">
+        <button id="downloadImageBtn" class="btn">Download as Image</button>
+        <button id="downloadPdfBtn" class="btn" style="margin-left: 10px;">Download as PDF</button>
+      </div>
+    </main>
+ 
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- POP-UP MODAL FOR "Save & Download" -->
+    <div id="reportModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>Save Report</h2>
+        <form id="reportForm"  draggable="false" ondragstart="return false;" ondrop="return false;">
+          <!-- Hidden input for the chosen download type (pdf or image) -->
+          <input type="hidden" name="type" id="reportTypeField" value="" />
+          <label for="reportDesc">Report Description</label>
+          <textarea name="reportDesc" id="reportDesc" rows="3" placeholder="E.g., Monthly expense breakdown..." ></textarea>
+          <button type="submit" class="btn" id="saveReportBtn">Save &amp; Download</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- If you have a separate dashboard.js, keep it. -->
+    <script src="/js/dashboard.js"></script>
+
+    <script src="/js/reports.js"></script>
+    <%- include("partials/loading") %>
+  </body>
+</html>

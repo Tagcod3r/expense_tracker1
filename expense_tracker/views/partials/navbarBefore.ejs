@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #F9F9F8; border-bottom: 0.1px solid #e0e0df; width: 98vw; margin: 0 auto;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/logo.webp" alt="Logo" style="height:50px; width:50px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: none;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto" id="navbar-links">
+          <li class="nav-item">
+            <a class="nav-link <%= activePage === 'home' ? 'active' : '' %>" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= activePage === 'dashboard' ? 'active' : '' %>" href="#trail">Dashboard</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link  <%= activePage === 'features' ? 'active' : '' %>" href="#trail">
+              Features
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link  <%= activePage === 'Settings' ? 'active' : '' %>" href="#trail">
+              Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

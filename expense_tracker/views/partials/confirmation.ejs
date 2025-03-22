@@ -1,0 +1,13 @@
+<!-- Delete Confirmation Modal -->
+<div id="confirm-modal">
+  <div class="modal-content">
+    <h2>Are you sure?</h2>
+    <p>This action will permanently delete your profile. Do you want to proceed?</p>
+    <div class="modal-buttons">
+      <form action="/delete" method="POST">
+        <button type="submit" id="confirm-delete" class="btn btn-confirm">Yes, Delete</button>
+      </form>
+      <button id="cancel-delete" class="btn btn-cancel">Cancel</button>
+    </div>
+  </div>
+</div>

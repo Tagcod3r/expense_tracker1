@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expenses</title>
+  <link rel="icon" href="/logo.webp" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/expenses.css">
+  <link rel="stylesheet" href="/css/addExpenseModel.css">
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/addExpenseModel.js" defer></script>
+</head>
+<body>
+  <%- include("partials/dashboardSidebar") %>
+  <main class="dashboard">
+    <header class="expense-header">
+      <h1>Expenses</h1>
+      <button id="menu-toggle" class="menu-toggle">☰</button> 
+    </header>
+    <div class="search-and-add">
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search..." />
+      <button class="add-expense-btn">+ Add</button>
+    </div>
+    <div id="note-message" role="alert" aria-live="polite">
+      <p>Note: All displayed data pertains to your selected account.</p>
+      <button class="close-btn" aria-label="Close notification">&times;</button>
+    </div>
+    
+    <!-- Expense Table Section -->
+    <section class="expense-table-section">
+      <table class="expense-table" id="expenseTable">
+        <thead>
+          <tr>
+            <th>Date &amp; Time</th>
+            <th>Spent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (expenses && expenses.length > 0) { %>
+            <% expenses.forEach(expense => { %>
+              <tr>
+                <td><%= new Date(expense.expense_date).toLocaleString() %></td>
+                <td>₹ <%= expense.expense_amount %></td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="2">No expenses recorded.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% if (expenseMessage) { %>
+        <div class="flash-message success"><%= expenseMessage %></div>
+      <% } %>
+      
+      <!-- This Month's Total (Calculate it on the backend or using JavaScript) -->
+      <div class="monthly-total">
+        <strong>This Month's Total:</strong> ₹ <%= total %>
+      </div>      
+    </section>
+  </main>
+  <%- include("partials/expenseform") %>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/expenses.js"></script>
+  <%- include("partials/loading") %>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!-- Loading Animation -->
+<div class="loading-screen">
+    <div class="bouncing-balls">
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+  </div>
+  
+  <style>
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+  
+  .loading-screen.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .bouncing-balls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1e9ab9;
+    animation: bounce 0.6s infinite alternate;
+  }
+  
+  .ball:nth-child(2) {
+    animation-delay: 0.2s;
+    background-color: #1e9ab9aa;
+  }
+  
+  .ball:nth-child(3) {
+    animation-delay: 0.4s;
+    background-color: #1e9ab977;
+  }
+  
+  .ball:nth-child(4) {
+    animation-delay: 0.6s;
+    background-color: #1e9ab944;
+  }
+  
+  @keyframes bounce {
+    from {
+      transform: translateY(0) scaleX(1);
+    }
+    to {
+      transform: translateY(-30px) scaleX(1.1);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .ball {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  </style>
+  
+  <script>
+  // Show loading screen if page takes too long to load
+  let loadingTimeout;
+  const loadingScreen = document.querySelector('.loading-screen');
+  
+  window.addEventListener('load', () => {
+    clearTimeout(loadingTimeout);
+    loadingScreen.classList.remove('active');
+  });
+  
+  // Show loading screen after 1 second if page hasn't loaded
+  loadingTimeout = setTimeout(() => {
+    loadingScreen.classList.add('active');
+  }, 1000);
+  
+  // Always remove loading screen after 4 seconds as fallback
+  setTimeout(() => {
+    loadingScreen.classList.remove('active');
+  }, 4000);
+  
+  // Optional: Remove loading screen on first user interaction
+  document.addEventListener('click', () => {
+    loadingScreen.classList.remove('active');
+  }, { once: true });
+  </script>
