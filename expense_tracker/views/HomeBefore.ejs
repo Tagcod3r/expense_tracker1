@@ -159,6 +159,35 @@
     </div>
   </section>
 
+  
+  <script>
+    function validateEmail(input) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+      if (emailRegex.test(input.value)) {
+        input.style.border = "1px solid  #007bff";
+        input.setCustomValidity(""); 
+      } else {
+        input.style.border = "2px solid #e63946";
+        input.setCustomValidity("Please enter a valid email address.");
+      }
+    }
+    
+    // Attach event listener to all email inputs dynamically
+    document.querySelectorAll("input[type='email']").forEach((emailInput) => {
+      // Validate email on input
+      emailInput.addEventListener("input", function () {
+        validateEmail(emailInput);
+      });
+    
+      emailInput.addEventListener("blur", function () {
+        if(emailInput.trim()=== ""){
+          emailInput.style.border = ""; 
+        }
+      });
+    });
+    
+      </script>
     
     
     <script>
