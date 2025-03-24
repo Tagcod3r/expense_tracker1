@@ -118,32 +118,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // (Optional) Mobile drag-down to close modal (if desired)
   // Function to add mobile drag-down (swipe) to close functionality on a modal element
-function enableSwipeToClose(modalElement) {
-  let startY = 0;
-  let endY = 0;
 
-  modalElement.addEventListener("touchstart", function(e) {
-    startY = e.touches[0].clientY;
-  });
-
-  modalElement.addEventListener("touchmove", function(e) {
-    endY = e.touches[0].clientY;
-  });
-
-  modalElement.addEventListener("touchend", function(e) {
-    const swipeDistance = endY - startY;
-    const threshold = 100; // Adjust this threshold as needed
-    if (swipeDistance > threshold) {
-      closeModal(modalElement);
-    }
-  });
-}
-
-// Enable swipe-to-close for your modals
-if (expenseModal) {
-  enableSwipeToClose(expenseModal);
-}
-if (expenseDetailsModal) {
-  enableSwipeToClose(expenseDetailsModal);
-}
 });
