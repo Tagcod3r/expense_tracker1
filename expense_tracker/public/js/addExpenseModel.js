@@ -119,71 +119,70 @@ document.addEventListener("DOMContentLoaded", function () {
   // (Optional) Mobile drag-down to close modal (if desired)
 function enableSwipeToClose(modalElement) {
   let startY = 0;
-  let currentY = 0;
-  const threshold = 0.3; // 30% of modal height
+  let startX = 0;
   let isSwiping = false;
-
-  function getTranslateY() {
-    const style = window.getComputedStyle(modalElement);
-    return parseInt(style.transform.split(',')[5] || 0);
-  }
+  const threshold = 100; // Minimum swipe distance to close
+  const contentElement = modalElement.querySelector('.modal-content');
 
   modalElement.addEventListener("touchstart", (e) => {
     startY = e.touches[0].clientY;
-    currentY = getTranslateY();
+    startX = e.touches[0].clientX;
     isSwiping = true;
-    modalElement.style.transition = 'none'; // Disable transitions during drag
+    
+    // Only enable swipe if scrolled to top
+    const isAtTop = contentElement.scrollTop <= 0;
+    isSwiping = isAtTop;
+    
+    if (isSwiping) {
+      modalElement.style.transition = 'none';
+    }
   });
 
   modalElement.addEventListener("touchmove", (e) => {
     if (!isSwiping) return;
     
     const deltaY = e.touches[0].clientY - startY;
-    const newY = currentY + deltaY;
+    const deltaX = e.touches[0].clientX - startX;
     
-    // Only allow downward swipe
-    if (newY > 0) {
-      modalElement.style.transform = `translateY(${newY}px)`;
+    // Check if vertical swipe (prevent horizontal swipes from interfering)
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      // Only allow downward swipe if at top
+      if (deltaY > 0) {
+        e.preventDefault();
+        modalElement.style.transform = `translateY(${deltaY}px)`;
+        modalElement.style.opacity = 1 - (deltaY / 300);
+      }
     }
-    
-    // Add opacity fade effect (optional)
-    modalElement.style.opacity = 1 - (newY / 300); // Adjust 300 based on your modal height
   });
 
   modalElement.addEventListener("touchend", (e) => {
     if (!isSwiping) return;
     
-    isSwiping = false;
-    const finalY = getTranslateY();
-    const modalHeight = modalElement.offsetHeight;
-
-    // Smooth close if past threshold
-    if (finalY > modalHeight * threshold) {
+    const deltaY = e.changedTouches[0].clientY - startY;
+    
+    if (deltaY > threshold) {
       modalElement.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s';
-      modalElement.style.transform = `translateY(${modalHeight}px)`;
+      modalElement.style.transform = `translateY(100%)`;
       modalElement.style.opacity = '0';
       
       setTimeout(() => {
         closeModal(modalElement);
-        // Reset styles
         modalElement.style.transform = '';
         modalElement.style.opacity = '';
       }, 300);
     } else {
-      // Snap back with bounce
-      modalElement.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      modalElement.style.transition = 'transform 0.3s ease';
       modalElement.style.transform = 'translateY(0)';
       modalElement.style.opacity = '1';
     }
+    
+    isSwiping = false;
   });
 
-  // Prevent scroll locking
-  modalElement.addEventListener("touchmove", (e) => {
-    if (isSwiping) e.preventDefault();
+  // Allow regular scrolling
+  modalElement.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    e.preventDefault();
   }, { passive: false });
 }
-
-// Usage with your existing modal elements
-if (expenseModal) enableSwipeToClose(expenseModal);
-if (expenseDetailsModal) enableSwipeToClose(expenseDetailsModal);
 });
