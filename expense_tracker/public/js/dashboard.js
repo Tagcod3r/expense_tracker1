@@ -168,29 +168,4 @@ document.addEventListener("DOMContentLoaded", function() {
   cancelAccountModal.addEventListener("click", hideModal);
 
   // --- Mobile drag-down to close for account modal ---
-  function enableSwipeToClose(modalElement) {
-    let startY = 0;
-    let endY = 0;
-    const threshold = 100; // Adjust swipe threshold in pixels
-
-    modalElement.addEventListener("touchstart", function(e) {
-      startY = e.touches[0].clientY;
-    });
-
-    modalElement.addEventListener("touchmove", function(e) {
-      endY = e.touches[0].clientY;
-    });
-
-    modalElement.addEventListener("touchend", function(e) {
-      const swipeDistance = endY - startY;
-      if (swipeDistance > threshold) {
-        hideModal();
-      }
-    });
-  }
-
-  // Enable swipe-to-close for account modal
-  if (accountModal) {
-    enableSwipeToClose(accountModal);
-  }
-});
+  
