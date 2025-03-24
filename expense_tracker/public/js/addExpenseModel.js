@@ -117,33 +117,73 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // (Optional) Mobile drag-down to close modal (if desired)
-  // Function to add mobile drag-down (swipe) to close functionality on a modal element
 function enableSwipeToClose(modalElement) {
   let startY = 0;
-  let endY = 0;
+  let currentY = 0;
+  const threshold = 0.3; // 30% of modal height
+  let isSwiping = false;
 
-  modalElement.addEventListener("touchstart", function(e) {
+  function getTranslateY() {
+    const style = window.getComputedStyle(modalElement);
+    return parseInt(style.transform.split(',')[5] || 0);
+  }
+
+  modalElement.addEventListener("touchstart", (e) => {
     startY = e.touches[0].clientY;
+    currentY = getTranslateY();
+    isSwiping = true;
+    modalElement.style.transition = 'none'; // Disable transitions during drag
   });
 
-  modalElement.addEventListener("touchmove", function(e) {
-    endY = e.touches[0].clientY;
+  modalElement.addEventListener("touchmove", (e) => {
+    if (!isSwiping) return;
+    
+    const deltaY = e.touches[0].clientY - startY;
+    const newY = currentY + deltaY;
+    
+    // Only allow downward swipe
+    if (newY > 0) {
+      modalElement.style.transform = `translateY(${newY}px)`;
+    }
+    
+    // Add opacity fade effect (optional)
+    modalElement.style.opacity = 1 - (newY / 300); // Adjust 300 based on your modal height
   });
 
-  modalElement.addEventListener("touchend", function(e) {
-    const swipeDistance = endY - startY;
-    const threshold = 100; // Adjust this threshold as needed
-    if (swipeDistance > threshold) {
-      closeModal(modalElement);
+  modalElement.addEventListener("touchend", (e) => {
+    if (!isSwiping) return;
+    
+    isSwiping = false;
+    const finalY = getTranslateY();
+    const modalHeight = modalElement.offsetHeight;
+
+    // Smooth close if past threshold
+    if (finalY > modalHeight * threshold) {
+      modalElement.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s';
+      modalElement.style.transform = `translateY(${modalHeight}px)`;
+      modalElement.style.opacity = '0';
+      
+      setTimeout(() => {
+        closeModal(modalElement);
+        // Reset styles
+        modalElement.style.transform = '';
+        modalElement.style.opacity = '';
+      }, 300);
+    } else {
+      // Snap back with bounce
+      modalElement.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      modalElement.style.transform = 'translateY(0)';
+      modalElement.style.opacity = '1';
     }
   });
+
+  // Prevent scroll locking
+  modalElement.addEventListener("touchmove", (e) => {
+    if (isSwiping) e.preventDefault();
+  }, { passive: false });
 }
 
-// Enable swipe-to-close for your modals
-if (expenseModal) {
-  enableSwipeToClose(expenseModal);
-}
-if (expenseDetailsModal) {
-  enableSwipeToClose(expenseDetailsModal);
-}
+// Usage with your existing modal elements
+if (expenseModal) enableSwipeToClose(expenseModal);
+if (expenseDetailsModal) enableSwipeToClose(expenseDetailsModal);
 });
