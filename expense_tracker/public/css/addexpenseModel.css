@@ -905,5 +905,5 @@
 .modal-content {
   overscroll-behavior: contain; /* Prevent browser overscroll */
   overflow-y: auto; /* Ensure scrolling is enabled */
-  max-height: 80vh; /* Match your modal's max-height */
+  max-height: 100vh; /* Match your modal's max-height */
 }
