@@ -143,29 +143,3 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 });
-
-//drag-down for accountform
-document.addEventListener("DOMContentLoaded", function() {
-  const addAccountBtn = document.getElementById("addAccountBtn");
-  const accountModal = document.getElementById("accountModal");
-  const closeAccountModal = document.getElementById("closeAccountModal");
-  const cancelAccountModal = document.getElementById("cancelAccountModal");
-
-  // Show modal when Add Account button is clicked
-  addAccountBtn.addEventListener("click", function() {
-    accountModal.classList.remove("hidden");
-    accountModal.classList.add("show");
-  });
-
-  // Function to hide modal
-  function hideModal() {
-    accountModal.classList.remove("show");
-    setTimeout(() => accountModal.classList.add("hidden"), 400);
-  }
-
-  // Close modal on button clicks
-  closeAccountModal.addEventListener("click", hideModal);
-  cancelAccountModal.addEventListener("click", hideModal);
-
-  // --- Mobile drag-down to close for account modal ---
-  
