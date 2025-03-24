@@ -896,14 +896,3 @@
   line-height: 1.5;
 }
 
-/* Mobile Padding Fix */
-@media (max-width: 768px) {
-  .expense-details-modal .modal-content {
-    padding: 15px;
-  }
-}
-.modal-content {
-  overscroll-behavior: contain; /* Prevent browser overscroll */
-  overflow-y: auto; /* Ensure scrolling is enabled */
-  max-height: 100vh; /* Match your modal's max-height */
-}
