@@ -1,7 +1,56 @@
-/* Section for Intro (and similar full‑page sections) */
-section { 
+/* =========================
+   Root Variables & Base Reset
+========================= */
+:root {
+  --surface-1: #ffffff;
+  --surface-2: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4d4d4d;
+  --accent-primary: #4361ee;
+  --danger: #ff4757;
+  --transition-speed: 0.3s;
+  --radius-base: 0.5rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+  --border-accent: #ff4757;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   Base Styles & Layout Helpers
+========================= */
+body, html {
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #F9F9F8;
+  color: #333;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Force full viewport width on specific elements */
+section,
+.main-container,
+.queries-section,
+.footer {
+  width: 100vw;
+  margin-right: -1px; /* Compensate for 1px rounding error */
+}
+
+/* =========================
+   Intro & Full-Page Sections
+========================= */
+section {
   width: 100%;
-  min-height: 50vh;  /* Changed from fixed height to minimum height */
+  min-height: 50vh; /* Minimum height */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -11,33 +60,32 @@ section {
 
 .intro {
   background-image: repeating-linear-gradient(
-    45deg, 
-    rgba(0, 0, 0, 0.05) 0px, 
+    45deg,
+    rgba(0, 0, 0, 0.05) 0px,
     rgba(0, 0, 0, 0.05) 2px, /* Thinner lines */
-    transparent 1px, 
-    transparent 10px 
+    transparent 1px,
+    transparent 10px
   );
   overflow: hidden;
   padding: 20px;
 }
 
+/* Short Message Styles */
 .short-message p {
   animation: none !important;
   font-size: 4vw;
-  color: #000000;
+  color: #000;
   margin-bottom: 20px;
   text-align: left;
   margin-left: 8vw;
 }
 
-/* Responsive styles for .short-message p */
 @media (max-width: 768px) {
   .short-message p {
     font-size: 6vw;
     margin-bottom: 15px;
   }
 }
-
 @media (max-width: 480px) {
   .short-message p {
     font-size: 8vw;
@@ -45,7 +93,7 @@ section {
   }
 }
 
-/* Styles for span1 */
+/* Span1 (Gradient Text) */
 span1 {
   font-size: 4vw;
   font-weight: bold;
@@ -54,38 +102,30 @@ span1 {
   background-clip: text;
   -webkit-background-clip: text;
 }
-
 @media (max-width: 768px) {
-  span1 {
-    font-size: 6vw;
-  }
+  span1 { font-size: 6vw; }
 }
-
 @media (max-width: 480px) {
-  span1 {
-    font-size: 8vw;
-  }
+  span1 { font-size: 8vw; }
 }
 
-/* Intro Heading */
+/* Intro Headings */
 .intro h1 {
-  font-family: sans-serif - 400;
-  font-size: 3em; 
+  font-family: sans-serif;
+  font-size: 3em;
   animation: text 3s 1;
-  color: black; 
-  margin: 0 auto; 
+  color: black;
+  margin: 0 auto;
 }
-
 .intro p {
   text-align: center;
-  font-family: sans-serif - 400;
+  font-family: sans-serif;
   font-weight: 400;
-  font-size: 2em; 
-  color: rgb(0, 0, 0);
+  font-size: 2em;
+  color: #000;
   animation: text2 4s;
 }
 
-/* Keyframes */
 @keyframes text {
   0% {
     color: white;
@@ -96,128 +136,26 @@ span1 {
     margin-bottom: -40px;
   }
 }
-
 @keyframes text2 {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
+  0% { opacity: 0; }
+  50% { opacity: 0; }
 }
 
-/* Responsive Design */
+/* Responsive Intro Adjustments */
 @media (min-width: 768px) {
-  .intro h1 {
-    font-size: 3em;
-  }
-  p {
-    font-size: 1.3em;
-  }
-  section {
-    min-height: 50vh; /* using min-height instead of fixed height */
-  }
+  .intro h1 { font-size: 3em; }
+  p { font-size: 1.3em; }
+  section { min-height: 50vh; }
 }
-
 @media (min-width: 1024px) {
-  .intro h1 {
-    font-size: 3.5em;
-  }
-  section {
-    min-height: 70vh; /* Changed from height to min-height */
-  }
-  p {
-    font-size: 1.5em;
-  }
+  .intro h1 { font-size: 3.5em; }
+  section { min-height: 70vh; }
+  p { font-size: 1.5em; }
 }
 
-.contents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  text-align: center;
-  width: 100%;
-  gap: 20px;
-}
-
-.intro-text {
-  font-family: sans-serif - 400;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
-  position: relative;
-  color: black;
-  letter-spacing: 2px;
-}
-
-.arrow {
-  display: block;
-  font-size: 2rem;
-  margin-top: 10px;
-  animation: bounce 1.5s infinite;
-  color: #020303;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
-
-.spacer {
-  height: 100vh;
-}
-
-.tagline {
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
-  padding: 20px;
-  background: linear-gradient(135deg, #ffffff, #e0e0e0);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.tagline.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tagline p {
-  color: #000;
-  font-size: 3.5em;
-  letter-spacing: 0.05em;
-  border-right: 2px solid black;
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  animation: typing 2s steps(40, end), cursor 0.6s step-end infinite;
-}
-
-@keyframes cursor {
-  50% { border-color: transparent; }
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@media (max-width: 768px) {
-  .tagline { font-size: 0.4em; }
-}
-
-@media (max-width: 480px) {
-  .tagline { font-size: 1.5em; }
-}
-
-/* Main container with flexbox layout */
+/* =========================
+   Main Container & Content Sections
+========================= */
 .main-container {
   display: flex;
   flex-wrap: wrap;
@@ -226,106 +164,24 @@ span1 {
   margin: 20px;
   padding: 40px;
   background-color: transparent;
-  width: 100%;
   border-bottom: 0.1px solid #e0e0df;
 }
-
-/* Content section styling */
 .content-section {
   text-align: left;
   flex: 1 1 45%;
   padding: 40px;
 }
-
-/* Style the button */
-button {
-  background-color: black;
-  color: white;
-  padding: 10px 28px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(45deg, #1e9ab9, #6d6dd1);
-  transform: scale(1.05);
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #1e9ab9;
-}
-
 .image-video-section {
   background-color: #f6f6f662;
   flex: 1 1 45%;
 }
-
-/* List styling */
-ul {
-  list-style: none;
-  margin-top: 10px;
-}
-
-li {
-  font-size: 1.2rem;
-  color: #4E4E4E;
-  margin-bottom: 15px;
-  position: relative;
-}
-
-/* Responsive, fluid text for content-section paragraph */
-.content-section p {
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-  font-weight: bold;
-  color: #212529;
-  padding-bottom: 20px;
-  background: linear-gradient(45deg, #69abcb, #2626c5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: none;
-  text-align: left;
-  letter-spacing: 1px;
-  font-family: 'Poppins', sans-serif;
-  position: relative;
-  display: inline-block;
-  z-index: 2;
-}
-.content-section p::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 15px;
-  width: 100%;
-  height: 0.5em;
-  background-color: rgba(13, 134, 164, 0.53);
-  z-index: -1;
-}
-
-/* Checkmark styling */
-.checkmark {
-  position: absolute;
-  left: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  background-color: #0040ff;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-/* Image and video section styling */
 .image-video-section img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
+/* Responsive adjustments for main container */
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
@@ -336,28 +192,22 @@ li {
   .image-video-section {
     flex: 1 1 100%;
   }
-  .image-video-section img {
-    margin-bottom: 20px;
-  }
-  /* Override for content-section text responsiveness on smaller devices */
+  .image-video-section img { margin-bottom: 20px; }
   .content-section p {
     font-size: clamp(1.3rem, 3vw, 2rem);
   }
-  li {
-    font-size: 1rem;
-  }
+  li { font-size: 1rem; }
 }
-
 @media (max-width: 480px) {
   .content-section p {
     font-size: clamp(1.2rem, 4vw, 1.5rem);
   }
-  li {
-    font-size: 0.9rem;
-  }
+  li { font-size: 0.9rem; }
 }
 
-/* Lottie container for desktop & default */
+/* =========================
+   Lottie Animation Container
+========================= */
 #lottie-container {
   position: relative;
   width: 300px;
@@ -365,7 +215,6 @@ li {
   margin: auto;
   overflow: hidden;
 }
-
 #lottie-container dotlottie-player {
   position: absolute;
   top: 50%;
@@ -376,11 +225,9 @@ li {
   opacity: 0;
   transition: opacity 1s ease;
 }
-
 #lottie-container dotlottie-player.visible {
   opacity: 1;
 }
-
 @media (max-width: 768px) {
   #lottie-container {
     width: 100%;
@@ -392,13 +239,12 @@ li {
   #lottie-container dotlottie-player {
     width: 100% !important;
     height: 100% !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 }
 
-/* Queries Section Container */
+/* =========================
+   Queries Section
+========================= */
 .queries-section {
   width: 100%;
   padding: 40px 20px;
@@ -412,11 +258,9 @@ li {
     transparent 10px
   );
   background-clip: padding-box;
-  box-sizing: border-box;
   margin: 40px 0 0 0 !important;
 }
 
-/* Heading & Subheading */
 .queries-section h2 {
   font-family: 'Inter-SemiBold', 'Inter', sans-serif;
   font-size: 2.5rem;
@@ -436,7 +280,7 @@ li {
   word-break: break-word;
 }
 
-/* Queries Form Container */
+/* Queries Form */
 .queries-form {
   display: flex;
   flex-direction: column;
@@ -452,13 +296,11 @@ li {
   box-sizing: border-box;
 }
 
-/* Input & Textarea Fields */
 .queries-form input[type="email"],
 .queries-form textarea {
   width: 100%;
   padding: 12px 15px;
   border: 1px solid #ddd;
-  resize: none;
   border-radius: 6px;
   font-size: 1rem;
   color: #333;
@@ -466,17 +308,14 @@ li {
   transition: border-color 0.3s, box-shadow 0.3s;
   box-sizing: border-box;
 }
-
 .queries-form input[type="email"]::placeholder,
 .queries-form textarea::placeholder {
   color: #aaa;
 }
-
 .queries-form input[type="email"]:focus,
 .queries-form textarea:focus {
   border-color: #c2bfbf;
 }
-
 .queries-form textarea {
   min-height: 120px;
 }
@@ -495,25 +334,17 @@ li {
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   box-sizing: border-box;
 }
-
 .queries-form button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   background: linear-gradient(135deg, #111, #444);
 }
 
-/* Responsive Design for Queries Section */
-/* For screens up to 1024px */
+/* Responsive Queries Section */
 @media (max-width: 1024px) {
-  .queries-section h2 {
-    font-size: 2rem;
-  }
-  .queries-section p {
-    font-size: 16px;
-  }
-  .queries-form {
-    padding: 18px;
-  }
+  .queries-section h2 { font-size: 2rem; }
+  .queries-section p { font-size: 16px; }
+  .queries-form { padding: 18px; }
   .queries-form input[type="email"],
   .queries-form textarea,
   .queries-form button {
@@ -521,22 +352,11 @@ li {
     padding: 10px 12px;
   }
 }
-
-/* For screens up to 768px */
 @media (max-width: 768px) {
-  .queries-section {
-    padding: 30px 15px;
-  }
-  .queries-section h2 {
-    font-size: 1.8rem;
-  }
-  .queries-section p {
-    font-size: 15px;
-  }
-  .queries-form {
-    max-width: 100%;
-    padding: 15px;
-  }
+  .queries-section { padding: 30px 15px; }
+  .queries-section h2 { font-size: 1.8rem; }
+  .queries-section p { font-size: 15px; }
+  .queries-form { max-width: 100%; padding: 15px; }
   .queries-form input[type="email"],
   .queries-form textarea,
   .queries-form button {
@@ -544,18 +364,10 @@ li {
     padding: 10px 12px;
   }
 }
-
-/* For screens up to 480px */
 @media (max-width: 480px) {
-  .queries-section {
-    padding: 20px 10px;
-  }
-  .queries-section h2 {
-    font-size: 1.5rem;
-  }
-  .queries-section p {
-    font-size: 14px;
-  }
+  .queries-section { padding: 20px 10px; }
+  .queries-section h2 { font-size: 1.5rem; }
+  .queries-section p { font-size: 14px; }
   .queries-form input[type="email"],
   .queries-form textarea,
   .queries-form button {
@@ -564,7 +376,9 @@ li {
   }
 }
 
-/* Footer Styles */
+/* =========================
+   Footer Styles
+========================= */
 .footer {
   background-color: #F9F9F8;
   padding: 0 20px 40px 20px;
@@ -636,21 +450,18 @@ li {
     flex-direction: column;
     gap: 20px;
   }
-  .queries-section, 
+  .queries-section,
   .footer {
     margin: 0;
     padding: 0;
   }
-  .queries-section {
-    padding-bottom: 0;
-  }
-  .footer {
-    padding-top: 0;
-  }
+  .queries-section { padding-bottom: 0; }
+  .footer { padding-top: 0; }
 }
 
-/* Additional spacing tweaks for mobile devices */
-/* For screens up to 768px */
+/* =========================
+   Additional Mobile Spacing Tweaks
+========================= */
 @media (max-width: 768px) {
   .main-container {
     padding: 20px;
@@ -668,16 +479,12 @@ li {
     margin-left: 5vw;
   }
 }
-
-/* For screens up to 480px */
 @media (max-width: 480px) {
   .main-container {
     padding: 10px;
     margin: 5px;
   }
-  .content-section {
-    padding: 10px;
-  }
+  .content-section { padding: 10px; }
   .queries-section {
     padding: 20px 10px;
     margin-top: 15px;
@@ -687,7 +494,10 @@ li {
     margin-left: 4vw;
   }
 }
-/* Get Started Button Styles */
+
+/* =========================
+   Get Started Button
+========================= */
 .get-started {
   background-color: black;
   color: white;
@@ -698,7 +508,7 @@ li {
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
-  margin-top: 20px; /* If you want to keep this inline style, you can remove it here */
+  margin-top: 20px;
 }
 
 .get-started:hover {
@@ -706,14 +516,16 @@ li {
   transform: scale(1.05);
 }
 
-/* Responsive tweaks for Get Started Button on small screens */
 @media (max-width: 480px) {
   .get-started {
     padding: 8px 20px;
     font-size: 0.9rem;
   }
 }
-/* Flash message styles */
+
+/* =========================
+   Flash Message Styles
+========================= */
 .flash-message {
   position: fixed;
   top: 20px;
@@ -734,12 +546,10 @@ li {
   justify-content: center;
   word-break: break-word;
 }
-
 .flash-message.error {
   background: linear-gradient(135deg, #e74c3c, #c0392b);
   color: #fff;
 }
-
 .flash-message.success {
   background: linear-gradient(135deg, #2ecc71, #27ae60);
   color: #fff;
@@ -764,7 +574,7 @@ li {
   }
 }
 
-/* Responsive adjustments */
+/* Responsive Flash Message */
 @media (min-width: 480px) {
   .flash-message {
     padding: 15px 25px;
@@ -773,13 +583,9 @@ li {
     max-width: 80%;
   }
 }
-
 @media (min-width: 768px) {
-  .flash-message {
-    max-width: 70%;
-  }
+  .flash-message { max-width: 70%; }
 }
-
 @media (min-width: 1024px) {
   .flash-message {
     max-width: 600px;
@@ -787,7 +593,6 @@ li {
     font-size: 17px;
   }
 }
-
 @media (hover: hover) {
   .flash-message:hover {
     transform: translateX(-50%) scale(1.02);
@@ -795,87 +600,98 @@ li {
   }
 }
 
-/* Fix right-side gaps ONLY */
-body, html {
-  overflow-x: hidden; /* Prevent horizontal overflow */
-}
-
-section, .main-container, .queries-section, .footer {
-  width: 100vw; /* Force full viewport width */
-  margin-right: -1px; /* Compensate for potential 1px rounding errors */
-}
-
-.short-message p {
-  margin-right: 8vw; /* Mirror left margin for balance */
-}
-
-.image-video-section {
-  padding-right: 0 !important; /* Remove right padding */
-}
-
-/* Fix for potential flexbox gaps */
-.main-container {
-  margin-right: -0.1px; /* Fix flexbox edge gap */
-}
-
-/* Fix right-aligned content overflow */
-.content-section p::after {
-  right: 0; /* Align pseudo-element to right edge */
-  left: auto;
-  width: 100%; /* Match text indentation */
-}
-
-/*scroll up button */
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: #1e9ab9;
-  border-radius: 50%;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease-in-out;
-  z-index: 1000;
-}
-
-.back-to-top::after {
-  content: '▲';
-  color: white;
-  font-size: 24px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(0deg);
-  transition: transform 0.3s ease;
-}
-
-.back-to-top:hover {
-  background-color: #16657a;
-  transform: translateY(-5px);
-}
-
-.back-to-top:hover::after {
-  transform: translate(-50%, -60%) rotate(0deg);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
+/* =========================
+   Responsive Account & Form Elements
+========================= */
 @media (max-width: 768px) {
-  .back-to-top {
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+  .add-account-btn, 
+  .account-selection {
+    width: 100%;
   }
-  
-  .back-to-top::after {
-    font-size: 20px;
+  .form-select,
+  #accountDropdown {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
   }
+}
+@media (max-width: 480px) {
+  .account-selection label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  #accountDropdown {
+    padding: 0.8rem;
+    font-size: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* =========================
+   Utility Classes
+========================= */
+.value-animate {
+  transition: all 0.8s ease-out;
+  display: inline-block;
+  min-width: 100px;
+}
+#balanceAmount,
+#totalExpensesDisplay,
+#initialBalanceDisplay {
+  display: inline-block;
+  min-width: 120px;
+}
+
+/* =========================
+   Expense Table
+========================= */
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+}
+.expense-table thead {
+  background-color: #f5f5f5;
+}
+.expense-table th,
+.expense-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #444;
+}
+.expense-table th {
+  font-weight: 600;
+  color: #333;
+}
+.expense-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+.expense-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================
+   View All Link
+========================= */
+.view-all {
+  text-align: right;
+  margin-top: 10px;
+}
+.view-all a {
+  color: #3791df;
+  text-decoration: none;
+  font-weight: 500;
+}
+.view-all a:hover {
+  color: #4361ee;
+  text-decoration: underline;
 }

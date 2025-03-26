@@ -1,12 +1,39 @@
-/* --------------------------
-   General Reset & Base Styles
---------------------------- */
+/* =========================
+   Root Variables & Base Reset
+========================= */
+:root {
+  --primary-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: #e0e0e0;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  
+  --accent-color: #1e9ab9;
+  --accent-hover: #1682a0;
+  --accent-gradient: linear-gradient(135deg, #1e9ab9, #1682a0);
+  --accent-hover-gradient: linear-gradient(135deg, #1682a0, #1e9ab9);
+  
+  --danger-color: #e74c3c;
+  --danger-hover: #c0392b;
+  --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+  --danger-hover-gradient: linear-gradient(135deg, #c0392b, #e74c3c);
+  
+  --logout-gradient: linear-gradient(135deg, #0b68a5, #61b3c8);
+  --logout-hover-gradient: linear-gradient(135deg, #0a5a92, #5292aa);
+  
+  --text-dark: #333;
+  --text-light: #fff;
+  --transition-speed: 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* --------------------------
+   Overall Page & Layout Styles
+-------------------------- */
 body {
   font-family: 'Inter', sans-serif;
   background-color: #F9F9F8;
@@ -18,7 +45,7 @@ body {
 
 /* --------------------------
    Expense Header
---------------------------- */
+-------------------------- */
 .expense-header {
   display: flex;
   flex-wrap: nowrap;
@@ -77,12 +104,12 @@ body {
 
 /* --------------------------
    Expense Table Section
---------------------------- */
+-------------------------- */
 .expense-table-section {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
 }
 
@@ -117,7 +144,7 @@ body {
 
 /* --------------------------
    Expense Modal
---------------------------- */
+-------------------------- */
 .expense-modal {
   position: fixed;
   top: 0;
@@ -184,7 +211,6 @@ body {
   font-size: 1rem;
   outline: none;
 }
-
 .modal-content form input:focus {
   border-color: #1e9ab9;
 }
@@ -224,7 +250,9 @@ body {
   background: #ccc;
 }
 
-/* Mobile Styles */
+/* --------------------------
+   Mobile Styles
+-------------------------- */
 @media (max-width: 768px) {
   .expense-modal {
     width: 100%;
@@ -235,11 +263,9 @@ body {
     left: 0;
     border-radius: 20px 20px 0 0;
   }
-
   .expense-modal.show {
     transform: translateY(0);
   }
-
   .modal-content::before {
     content: "";
     display: block;
@@ -249,28 +275,23 @@ body {
     border-radius: 2px;
     margin: 0 auto 10px;
   }
-
   .expense-header {
     flex-direction: row !important;
     gap: 10px;
   }
-
   .search-and-add {
     width: 100%;
     flex-direction: column;
     gap: 10px;
   }
-
   .search-bar,
   .add-expense-btn {
     width: 100%;
   }
-
   .expense-table th,
   .expense-table td {
     font-size: 0.9rem;
   }
-
   .monthly-total {
     text-align: left;
     font-size: 1rem;
