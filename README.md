@@ -38,13 +38,16 @@ Try Expense Tracker live: [https://your-expense-tracker.onrender.com](https://yo
    cd expense_tracker
 
 2. **Install Dependency**
+
   npm install
 
 3. **Configure .env**
+
   SESSION_SECRET=your_secret_key
   SUPABASE_URL=your_supabase_url
   SUPABASE_KEY=your_supabase_key
-  
+
 4. **Run the Application**
+
   npm start
 
