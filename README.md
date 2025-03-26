@@ -39,9 +39,12 @@ Try Expense Tracker live: [https://your-expense-tracker.onrender.com](https://yo
 
 2. **Install Dependency**
 
+  ```bash
   npm install
 
 3. **Configure .env**
+
+  ```bash
 
   SESSION_SECRET=your_secret_key
   SUPABASE_URL=your_supabase_url
@@ -49,5 +52,6 @@ Try Expense Tracker live: [https://your-expense-tracker.onrender.com](https://yo
 
 4. **Run the Application**
 
+  ```bash
   npm start
 
