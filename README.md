@@ -24,6 +24,18 @@ Expense Tracker is a web application that helps you manage your finances efficie
 - **Backend:** Node.js, Express,Postgres (Development Phase), Supabase (Deployment Phase), bcryptjs, connect-flash, express-session
 - **Database:** Supabase (PostgreSQL)
 - **Deployment:** Render, GitHub
+## Preview
+-  **HomePage**
+  
+![Dashboard Preview](https://github.com/user-attachments/assets/2982dfc8-84e2-48e5-94ac-51946e0665ed)
+
+- **Dashboard View**
+  
+![Image](https://github.com/user-attachments/assets/180ebaa2-ccf6-4b52-bcbe-1ac68bcf3b39)
+
+- **Responsive Design**
+
+![Image](https://github.com/user-attachments/assets/0cc75c42-ffdd-46e4-8fca-08dc87a4ba24)
 
 ## Live Demo
 
