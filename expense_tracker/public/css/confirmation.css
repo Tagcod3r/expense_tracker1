@@ -1,132 +1,122 @@
-/* =========================
-   CONFIRM MODAL BASE STYLES
-=========================== */
+/* Base modal styles - hidden by default */
 #confirm-modal {
-  display: none; /* Hidden initially */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px); /* Subtle blur for background */
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  padding: 1rem;
-}
-
-#confirm-modal.active {
-  display: flex;
-}
-
-/* =========================
-   MODAL CONTENT STYLES
-=========================== */
-.modal-content {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  animation: fadeIn 0.4s ease-out;
-  border: 1px solid #ddd;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
+    display: none; /* Hidden initially */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);  /* Subtle blur for background */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1rem;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+  
+  /* Class to display the modal */
+  #confirm-modal.active {
+    display: flex;
   }
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  font-size: 1.75rem;
-  color: #333;
-}
-
-.modal-content p {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #555;
-}
-
-/* =========================
-   MODAL BUTTON CONTAINER
-=========================== */
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-/* =========================
-   BASE BUTTON STYLES
-=========================== */
-.btn {
-  margin: 10px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  font-size: 1rem;
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Global hover effect for buttons */
-.btn:hover {
-  transform: scale(1.05) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* =========================
-   CONFIRM & CANCEL BUTTONS
-=========================== */
-.btn-confirm {
-  background-color: #e74c3c !important;
-  color: #fff !important;
-}
-
-.btn-confirm:hover {
-  background-color: #c0392b !important;
-}
-
-.btn-cancel {
-  background-color: #95a5a6 !important;
-  color: #fff;
-}
-
-.btn-cancel:hover {
-  background-color: #7f8c8d !important;
-}
-
-/* =========================
-   RESPONSIVE ADJUSTMENTS
-=========================== */
-@media (max-width: 600px) {
+  
   .modal-content {
-    padding: 20px;
-    max-width: 90%;
-  }
-  .modal-buttons {
-    flex-direction: column;
-  }
-  .btn {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
     width: 100%;
-    margin: 5px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.4s ease-out;
+    border: 1px solid #ddd;
   }
-}
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: #333;
+  }
+  
+  .modal-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  /* Button container for layout */
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  /* Base button styles */
+  .btn {
+    margin: 10px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1rem;
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Confirm Button */
+  .btn-confirm {
+    background-color: #e74c3c !important;
+    color: #fff !important;
+  }
+  
+  .btn-confirm:hover {
+    background-color: #c0392b !important;
+  }
+  
+  /* Cancel Button */
+  .btn-cancel {
+    background-color: #95a5a6 !important;
+    color: #fff;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #7f8c8d !important;
+  }
+  
+  /* Global button hover effect */
+  .btn:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 600px) {
+    .modal-content {
+      padding: 20px;
+      max-width: 90%;
+    }
+    .modal-buttons {
+      flex-direction: column;
+    }
+    .btn {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
+  

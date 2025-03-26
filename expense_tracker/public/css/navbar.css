@@ -1,15 +1,16 @@
-/* =========================
-   General Reset & Base Styles
-========================= */
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   Navbar Base Styles
-========================= */
+body {
+  font-family: Arial, sans-serif;
+  background-color: white; 
+}
+
+/* Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -19,6 +20,8 @@
   color: black;
   padding: 1rem;
   position: relative;
+}
+.navbar {
   width: 100%;
   margin: 0 auto;
 }
@@ -28,9 +31,7 @@
   margin: 0;
 }
 
-/* =========================
-   Hamburger Menu
-========================= */
+/* Hamburger */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -60,9 +61,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* =========================
-   Navbar Links
-========================= */
+/* Navbar Links */
 .navbar-links {
   display: flex;
   list-style: none;
@@ -73,17 +72,18 @@
   margin: 0 1rem;
 }
 
+/* Default styles for all links */
 .navbar-links a {
   text-decoration: none;
   color: inherit;
   padding: 8px 12px;
-  border: 0.05px solid transparent; /* Ensure a border is always present */
+  border: 0.05px solid transparent; /* Ensure a border is always there */
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
   animation: delay 1.5s 1;
 }
 
-/* Active Link Styling */
+/* Active link styles */
 .navbar-links a.active {
   font-weight: bold;
   background-color: white;
@@ -93,7 +93,7 @@
   pointer-events: none;
 }
 
-/* Hover Effects */
+/* Normal hover effect */
 .navbar-links a:hover {
   text-decoration: none;
   background-color: #F9F9F8;
@@ -103,26 +103,23 @@
   border-radius: 10px;
 }
 
+/* Prevent hover effect on active link */
 .navbar-links a.active:hover {
   background-color: #FDFDFC !important;
   color: black !important;
   border: 0.05px solid #b4b5b6 !important;
   font-weight: bold !important;
   animation: none !important;
-  text-decoration: none;
+  text-decoration: none; 
 }
-
-/* Additional Active Nav-Link Styling */
+/* Active nav-link styling */
 .navbar-nav .nav-link.active {
-  font-weight: 700;
-  color: #000;
-  border-bottom: 2px solid #1e9ab9;
-  text-decoration: none;
+  font-weight: 700;             /* Bold text */
+  color: #000;                  /* Black text color */
+  border-bottom: 2px solid #1e9ab9; /* Underline effect with your accent color */
+  text-decoration: none; 
 }
 
-/* =========================
-   Animations
-========================= */
 @keyframes delay {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -145,15 +142,17 @@
   }
 }
 
-/* Ensure hover and active anchors have black text */
 .navbar-links a:hover,
 .navbar-links a:active {
   color: black;
 }
 
-/* =========================
-   Dropdown Menu
-========================= */
+.navbar-links a:hover::before,
+.navbar-links a:active::before {
+  transform: scaleX(1) scaleY(1);
+}
+
+/* Dropdown Menu */
 .dropdown {
   position: relative;
 }
@@ -177,27 +176,26 @@
 .dropdown:hover .dropdown-content,
 .dropdown.active .dropdown-content {
   display: block;
-  color: white;
+  color:white;
 }
-
-/* Prevent interference from Bootstrap */
+/* Ensure Bootstrap's dropdown styles don't interfere */
 .dropdown-menu .dropdown-item#delete-button:hover {
   background-color: darkred !important;
   color: white !important;
   transform: scale(1.05) !important;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
-  background-image: none !important;
+  background-image: none !important;  /* If a gradient is applied */
 }
 
-/* =========================
-   Responsive Design (Max-width: 768px)
-========================= */
+ 
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
   }
-  
-  /* Navbar links become a vertical, slide-down menu */
+
+  /* Slide-down animation and left alignment */
   .navbar-links {
     flex-direction: column;
     align-items: flex-start;
@@ -214,21 +212,23 @@
     pointer-events: none;
     transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
   }
-  
+
+
   /* Expanded state when hamburger is clicked */
   .navbar-links.active {
-    max-height: 500px; /* Adjust if needed */
+    max-height: 500px;  /* Adjust if needed */
     opacity: 1;
     pointer-events: auto;
   }
-  
-  /* List items take full width and left-aligned text */
+
+  /* Ensure each list item is left-aligned and takes full width */
   .navbar-links li {
     margin: 1rem 0;
     text-align: left;
     width: 100%;
   }
-  
+
+  /* Force each anchor to display as a block element with left-aligned text */
   .navbar-links li a {
     display: block;
     width: 100%;
@@ -236,8 +236,8 @@
     color: black;
     font-size: large;
   }
-  
-  /* Dropdown adjustments for mobile */
+
+  /* Mobile: Disable hover dropdown and use click toggling */
   .dropdown-content {
     display: none;
   }

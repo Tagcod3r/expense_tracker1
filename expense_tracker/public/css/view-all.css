@@ -1,5 +1,5 @@
 /* =========================
-   Root Variables & Base Reset
+   view-all.css Styles (Mobile-First)
 ========================= */
 :root {
   --surface-1: #ffffff;
@@ -15,15 +15,16 @@
   --border-accent: #ff4757;
 }
 
+/* Base Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* =========================
+/* -------------------------
    Mobile-First Base Styles
-========================= */
+------------------------- */
 
 /* Modal System */
 .modal {
@@ -64,13 +65,14 @@
   cursor: pointer;
   transition: all var(--transition-speed) ease;
 }
+
 .modal .close:hover {
   background: var(--accent-primary);
   color: var(--surface-1);
   transform: scale(1.1);
 }
 
-/* Expenses Layout & Cards */
+/* Expenses Layout */
 .expenses-list {
   display: grid;
   gap: 1.5rem;
@@ -88,12 +90,13 @@
   position: relative;
   overflow: hidden;
 }
+
 .expense-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-/* Paid Badge Styles */
+/* Paid Badge */
 .status-badge {
   position: absolute;
   top: 1rem;
@@ -105,6 +108,8 @@
   text-transform: uppercase;
   z-index: 10;
 }
+
+/* Paid Badge - Updated Style */
 .status-badge.paid {
   background: rgba(40, 167, 69, 0.12);
   color: #28a745;
@@ -115,7 +120,8 @@
   letter-spacing: normal;
 }
 
-/* Card Text & Elements */
+/* Card Elements */
+/* Add right padding to ensure text doesn’t run under the badge */
 .expense-card h3,
 .expense-card p,
 .expense-amount {
@@ -123,17 +129,20 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
 .expense-card h3 {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
+
 .expense-card p {
   color: var(--text-secondary);
   font-size: clamp(0.8rem, 2vw, 0.9rem);
   line-height: 1.5;
 }
+
 .expense-amount {
   font-family: 'Roboto Mono', monospace;
   font-size: clamp(1rem, 2.5vw, 1.25rem);
@@ -158,6 +167,7 @@
   width: 100%;
   justify-content: center;
 }
+
 .delete-btn:hover {
   background: rgba(255, 71, 87, 0.08);
   box-shadow: none;
@@ -171,7 +181,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* Modal Entrance Animation */
+/* Animations */
 @keyframes modalEntrance {
   from {
     opacity: 0;
@@ -210,15 +220,17 @@
     width: auto;
   }
   
-  /* Typography adjustments */
+  /* Restore original typography sizes on larger screens */
   .expense-card h3 {
     font-size: 1.25rem;
     padding-right: 4rem;
   }
+  
   .expense-card p {
     font-size: 0.9rem;
     padding-right: 4rem;
   }
+  
   .expense-amount {
     font-size: 1.25rem;
     padding-right: 4rem;

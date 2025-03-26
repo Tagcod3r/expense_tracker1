@@ -1,136 +1,132 @@
-/* =========================
-   Root Variables & Global Styles
-========================= */
+/* Root Variables */
 :root {
-  --primary-bg: #ffffff;
-  --card-bg: #ffffff;
-  --card-border: #e0e0e0;
-  --card-shadow: rgba(0, 0, 0, 0.1);
+    --primary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    
+    --accent-color: #1e9ab9;
+    --accent-hover: #1682a0;
+    --accent-gradient: linear-gradient(135deg, #1e9ab9, #1682a0);
+    --accent-hover-gradient: linear-gradient(135deg, #1682a0, #1e9ab9);
+    
+    --danger-color: #e74c3c;
+    --danger-hover: #c0392b;
+    --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+    --danger-hover-gradient: linear-gradient(135deg, #c0392b, #e74c3c);
+    
+    --logout-gradient: linear-gradient(135deg, #0b68a5, #61b3c8);
+    --logout-hover-gradient: linear-gradient(135deg, #0a5a92, #5292aa);
+    
+    --text-dark: #333;
+    --text-light: #fff;
+    --transition-speed: 0.3s ease;
+  }
   
-  --accent-color: #1e9ab9;
-  --accent-hover: #1682a0;
-  --accent-gradient: linear-gradient(135deg, #1e9ab9, #1682a0);
-  --accent-hover-gradient: linear-gradient(135deg, #1682a0, #1e9ab9);
+  /* Overall Page Styles */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9f8;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 40px;
+  }
   
-  --danger-color: #e74c3c;
-  --danger-hover: #c0392b;
-  --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
-  --danger-hover-gradient: linear-gradient(135deg, #c0392b, #e74c3c);
+  /* Container for Settings Page Content */
+  .settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
   
-  --logout-gradient: linear-gradient(135deg, #0b68a5, #61b3c8);
-  --logout-hover-gradient: linear-gradient(135deg, #0a5a92, #5292aa);
+  /* Row Layout for Cards */
+  .settings-options {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;  /* Ensures responsiveness on smaller screens */
+    max-width: 900px;
+    width: 100%;
+    margin-bottom: 30px;  /* Spacing above the footer */
+  }
   
-  --text-dark: #333;
-  --text-light: #fff;
-  --transition-speed: 0.3s ease;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f9f8;
-  color: var(--text-dark);
-  margin: 0;
-  padding: 40px;
-}
-
-/* =========================
-   Settings Page Layout
-========================= */
-.settings-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.settings-options {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 20px;
-  flex-wrap: wrap;  /* Ensures responsiveness on smaller screens */
-  max-width: 900px;
-  width: 100%;
-  margin-bottom: 30px;  /* Spacing above the footer */
-}
-
-/* =========================
-   Option Card Styles
-========================= */
-.option-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 25px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 10px var(--card-shadow);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-.option-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Card Text */
-.option-card h2 {
-  font-size: 1.6rem;
-  margin-bottom: 10px;
-  color: var(--text-dark);
-}
-
-.option-card p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-/* Hyperlinks within Cards */
-.option-card a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color var(--transition-speed);
-}
-
-.option-card a:hover {
-  color: var(--accent-hover);
-  text-decoration: underline;
-}
-
-/* Button Styling */
-.option-card button {
-  background: var(--accent-gradient);
-  color: var(--text-light);
-  border: none;
-  padding: 12px 28px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-.option-card button:hover {
-  background: var(--accent-hover-gradient);
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Delete Button - Danger Themed */
-.option-card button.delete-button {
-  background: var(--danger-gradient);
-  color: var(--text-light);
-}
-
-.option-card button.delete-button:hover {
-  background: var(--danger-hover-gradient) !important;
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Logout Button */
+  /* Card Design */
+  .option-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 25px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px var(--card-shadow);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .option-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Card Text */
+  .option-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+  }
+  
+  .option-card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  /* Hyperlinks within Cards */
+  .option-card a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-speed);
+  }
+  
+  .option-card a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+  
+  /* Button Styling */
+  .option-card button {
+    background: var(--accent-gradient);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .option-card button:hover {
+    background: var(--accent-hover-gradient);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Delete Button - Danger Themed with Gradient */
+  .option-card button.delete-button {
+    background: var(--danger-gradient);
+    color: var(--text-light);
+  }
+  
+  .option-card button.delete-button:hover {
+    background: var(--danger-hover-gradient) !important;
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Logout Button - Gradient Themed for Anchor Tag */
 .logout-btn {
   display: inline-block;
   text-align: center;
@@ -151,55 +147,53 @@ body {
   transform: scale(1.03);
 }
 
-/* =========================
-   Footer Styles
-========================= */
-.footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #555;
-  width: 100%;
-  border-top: 1px solid #e0e0df;
-  margin-top: 20px;
-}
-
-/* =========================
-   Responsive Adjustments
-========================= */
-@media (max-width: 768px) {
-  .settings-options {
-    flex-direction: column;
-    align-items: center;
-  }
-  .option-card {
-    width: 90%;
-    max-width: 320px;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 20px;
-  }
-  .option-card {
-    padding: 20px;
-  }
-  .option-card h2 {
-    font-size: 1.4rem;
-  }
-  .option-card p {
-    font-size: 0.9rem;
-  }
-  .option-card button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  .settings-options {
-    gap: 15px;
-  }
+  /* Footer Styling */
   .footer {
-    padding: 15px;
-    font-size: 0.8rem;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #555;
+    width: 100%;
+    border-top: 1px solid #e0e0df;
+    margin-top: 20px;
   }
-}
+  
+  /* Responsive Tweaks for screens up to 768px */
+  @media (max-width: 768px) {
+    .settings-options {
+      flex-direction: column;
+      align-items: center;
+    }
+    .option-card {
+      width: 90%;
+      max-width: 320px;
+    }
+  }
+  
+  /* Additional Responsive Tweaks for screens up to 480px */
+  @media (max-width: 480px) {
+    body {
+      padding: 20px;
+    }
+    .option-card {
+      padding: 20px;
+    }
+    .option-card h2 {
+      font-size: 1.4rem;
+    }
+    .option-card p {
+      font-size: 0.9rem;
+    }
+    .option-card button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+    .settings-options {
+      gap: 15px;
+    }
+    .footer {
+      padding: 15px;
+      font-size: 0.8rem;
+    }
+  }
+  
