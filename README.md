@@ -25,7 +25,7 @@ Expense Tracker is a web application that helps you manage your finances efficie
 - **Database:** Supabase (PostgreSQL)
 - **Deployment:** Render, GitHub
 ## Preview
--  **HomePage**
+-  **Home Page**
   
 ![Dashboard Preview](https://github.com/user-attachments/assets/2982dfc8-84e2-48e5-94ac-51946e0665ed)
 
