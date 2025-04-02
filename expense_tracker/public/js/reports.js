@@ -96,23 +96,117 @@ async function generateLineChart() {
 }
 
 // 3) Download Functions
-function downloadImage() {
+async function downloadImage() {
   const canvas = document.getElementById("chartCanvas");
-  const imageURL = canvas.toDataURL("image/png");
+  const ctx = canvas.getContext("2d");
+
+  // Fetch category-wise data
+  const { labels, totals } = await fetchReportData();
+
+  // Create a temporary canvas (to modify before saving)
+  const tempCanvas = document.createElement("canvas");
+  const tempCtx = tempCanvas.getContext("2d");
+
+  // Set new canvas size (increase height to accommodate the table)
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height + 150; // Extra space for the table
+
+  // Copy the chart to the temporary canvas
+  tempCtx.fillStyle = "#fff"; // Set background
+  tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+  tempCtx.drawImage(canvas, 0, 0);
+
+  // Draw the table
+  const startX = 50;
+  const startY = canvas.height + 20; // Position table below the chart
+  tempCtx.font = "14px Arial";
+  tempCtx.fillStyle = "#000";
+
+  // Table headers
+  tempCtx.fillText("Category", startX, startY);
+  tempCtx.fillText("Total Amount", startX + 150, startY);
+
+  // Draw table rows
+  labels.forEach((label, index) => {
+    tempCtx.fillText(label, startX, startY + (index + 1) * 20);
+    tempCtx.fillText(`₹ ${totals[index].toFixed(2)}`, startX + 150, startY + (index + 1) * 20);
+  });
+
+  // Convert the modified canvas to an image and download
+  const imageURL = tempCanvas.toDataURL("image/png");
   const a = document.createElement("a");
   a.href = imageURL;
-  a.download = "report.png";
+  a.download = "report_with_table.png";
   a.click();
 }
 
-function downloadPDF() {
+async function downloadPDF() {
   const canvas = document.getElementById("chartCanvas");
-  const imageURL = canvas.toDataURL("image/png");
+  const ctx = canvas.getContext("2d");
+
+  // Fetch category-wise data
+  const { labels, totals } = await fetchReportData();
+
+  // Create a temporary canvas (increase height to fit the table)
+  const tempCanvas = document.createElement("canvas");
+  const tempCtx = tempCanvas.getContext("2d");
+
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height + 150; // Extra space for the table
+
+  // Fill background white for visibility
+  tempCtx.fillStyle = "#fff";
+  tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+  // Draw the chart onto the temp canvas
+  tempCtx.drawImage(canvas, 0, 0);
+
+  // Draw the table
+  const startX = 50;
+  const startY = canvas.height + 20;
+  tempCtx.font = "14px Arial";
+  tempCtx.fillStyle = "#000";
+
+  // Table headers
+  tempCtx.fillText("Category", startX, startY);
+  tempCtx.fillText("Total Amount", startX + 150, startY);
+
+  // Table data
+  labels.forEach((label, index) => {
+    tempCtx.fillText(label, startX, startY + (index + 1) * 20);
+    tempCtx.fillText(`₹ ${totals[index].toFixed(2)}`, startX + 150, startY + (index + 1) * 20);
+  });
+
+  // Convert modified canvas to image
+  const imageURL = tempCanvas.toDataURL("image/png");
+
+  // Create PDF and maintain aspect ratio
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("landscape");
-  pdf.addImage(imageURL, "PNG", 10, 10, 280, 150);
-  pdf.save("report.pdf");
+  const pdf = new jsPDF("portrait");
+
+  // Get original canvas width and height
+  const canvasWidth = tempCanvas.width;
+  const canvasHeight = tempCanvas.height;
+
+  // Define max width and height for PDF (keeping margins)
+  const maxWidth = 190; // PDF page width limit
+  const maxHeight = 250; // PDF page height limit
+
+  // Calculate new height based on aspect ratio
+  let newWidth = maxWidth;
+  let newHeight = (canvasHeight / canvasWidth) * newWidth;
+
+  // If height exceeds max height, adjust width accordingly
+  if (newHeight > maxHeight) {
+    newHeight = maxHeight;
+    newWidth = (canvasWidth / canvasHeight) * newHeight;
+  }
+
+  // Add image to PDF with correct dimensions
+  pdf.addImage(imageURL, "PNG", 10, 10, newWidth, newHeight);
+  pdf.save("report_with_table.pdf");
 }
+
 
 function showDownloadOptions() {
   document.getElementById("downloadOptions").style.display = "block";
