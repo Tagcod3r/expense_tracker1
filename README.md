@@ -39,8 +39,8 @@ Expense Tracker is a web application that helps you manage your finances efficie
 
 ## Live Demo
 
-Try Expense Tracker live: -> [expensetracker1-production.up.railway.app](expensetracker1-production.up.railway.app) 
-                         or-> [https://your-expense-tracker.onrender.com](https://your-expense-tracker.onrender.com)
+Try Expense Tracker live: [Railway](https://expensetracker1-production.up.railway.app) | [Render](https://your-expense-tracker.onrender.com)
+
 
 ## How to Run Locally
 
